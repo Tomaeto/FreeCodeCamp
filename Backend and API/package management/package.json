@@ -3,6 +3,8 @@
 	"author": "Adrian Faircloth",
 	"description": "Package management section of Backend/API certification",
 	"keywords": ["freecodecamp", "package", "Testo"],
+	"license": "MIT",
+	"version": "1.0.0",
 	"dependencies": {
 		"express": "^4.14.0"
 	},
