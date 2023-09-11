@@ -1,18 +1,22 @@
-require('dotenv').config()
+require('dotenv').config();
 let express = require('express');
 let app = express();
 const dns = require('dns');
+let bodyParser = require('body-parser');
 dns.setDefaultResultOrder('ipv4first');
 
 
 app.use("/public", express.static(__dirname + "/public"));
-/*
+
 app.use(function middleware(req, res, next) {
     var str = req.method + " " + req.path + " - " + req.ip;
     console.log(str);
     next();
 });
-*/
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
