@@ -6,14 +6,20 @@ dns.setDefaultResultOrder('ipv4first');
 
 
 app.use("/public", express.static(__dirname + "/public"));
+/*
 app.use(function middleware(req, res, next) {
     var str = req.method + " " + req.path + " - " + req.ip;
     console.log(str);
     next();
 });
-
+*/
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/views/index.html');
+});
+
+app.get('/name', function(req, res) {
+    let {first: firstname, last: lastname} = req.query;
+    res.json({name: `${firstname} ${lastname}`})
 });
 
 app.get('/json', function(req, res) {
@@ -34,7 +40,6 @@ app.get('/:word/echo', function(req, res) {
     let word = req.params.word;
     res.json({echo: word});
 });
-
 
 
 
