@@ -17,6 +17,11 @@ app.use(function middleware(req, res, next) {
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.post('/name', function(req, res) {
+    let str = req.body.first + " " + req.body.last;
+    res.json({name: str});
+});
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
