@@ -1,8 +1,16 @@
 require('dotenv').config()
 let express = require('express');
 let app = express();
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 
 app.use("/public", express.static(__dirname + "/public"));
+app.use(function middleware(req, res, next) {
+    var str = req.method + " " + req.path + " - " + req.ip;
+    console.log(str);
+    next();
+});
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/views/index.html');
 })
