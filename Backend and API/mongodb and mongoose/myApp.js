@@ -24,9 +24,10 @@ const createAndSavePerson = async (done) =>  {
 
 };
 
-let arrayOfPeople = [{name: "Jerry", age: 25, favoriteFoods:["pineapple"]},
-{name: "Anna", age: 23, favoriteFoods: ["steak", "lemon"]}];
+
 const createManyPeople = (arrayOfPeople, done) => {
+  arrayOfPeople = [{name: "Jerry", age: 25, favoriteFoods:["pineapple"]},
+  {name: "Anna", age: 23, favoriteFoods: ["steak", "lemon"]}];
   Person.create(arrayOfPeople, function(err, data) {
     if (err) return console.error(err);
     done(null, data);
@@ -34,8 +35,14 @@ const createManyPeople = (arrayOfPeople, done) => {
 
 };
 
-const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+const findPeopleByName = async (personName, done) => {
+  try {
+    const data = await Person.find({name: personName});
+    done(null, data);
+  }
+  catch (err) {
+    console.error(err);
+  }
 };
 
 const findOneByFood = (food, done) => {
