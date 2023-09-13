@@ -13,7 +13,7 @@ const personSchema = new Schema({
 let Person = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = async (done) =>  {
-  let person = new Person({name: "John", age:20, favoriteFoods: ["chicken", "beef"]});
+  let person = new Person({name: "John", age:20, favoriteFoods: ["eggs", "fish", "fresh fruit"]});
   try {
   const data = await person.save();
   done(null, data)
@@ -45,12 +45,24 @@ const findPeopleByName = async (personName, done) => {
   }
 };
 
-const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+const findOneByFood = async (food, done) => {
+  try {
+    const data = await Person.findOne({favoriteFoods: food});
+    done(null, data);
+  }
+  catch(err) {
+    console.log(err);
+  }
 };
 
-const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+const findPersonById = async (personId, done) => {
+  try {
+    const data = await Person.findById(personId);
+    done(null, data);
+  }
+  catch (err) {
+    console.log(err);
+  }
 };
 
 const findEditThenSave = (personId, done) => {
